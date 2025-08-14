@@ -1,9 +1,13 @@
-export function setupCounter(element: HTMLButtonElement) {
-  let counter = 0
-  const setCounter = (count: number) => {
-    counter = count
-    element.innerHTML = `count is ${counter}`
-  }
-  element.addEventListener('click', () => setCounter(counter + 1))
-  setCounter(0)
+import type { Moedas } from "./types";
+import { rates } from "./data/rates";
+
+export default function converter(
+  amount: number,
+  from: Moedas,
+  to: Moedas
+): number {
+  const converterRate = rates[from][to];
+
+  const converterDinheiro = amount * converterRate;
+  return +converterDinheiro.toFixed(2);
 }
